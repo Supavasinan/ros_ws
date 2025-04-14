@@ -4,7 +4,6 @@ on:
   push:
     branches: [main]
 
-
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
@@ -24,12 +23,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set lowercase image name
+        id: vars
+        run: |
+          echo "image=ghcr.io/${GITHUB_REPOSITORY,,}:latest" >> "$GITHUB_OUTPUT"
+
       - name: Build Docker image
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository }}:latest
-          docker build -t $IMAGE_NAME .
+          docker build -t ${{ steps.vars.outputs.image }} .
 
       - name: Push Docker image
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository }}:latest
-          docker push $IMAGE_NAME
+          docker push ${{ steps.vars.outputs.image }}
