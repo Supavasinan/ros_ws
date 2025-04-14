@@ -30,7 +30,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ steps.vars.outputs.image }} ./.devcontainer/
+          docker build --platform linux/arm64 -t ${{ steps.vars.outputs.image }} ./.devcontainer/
 
       - name: Push Docker image
         run: |
