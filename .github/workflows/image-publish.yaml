@@ -54,3 +54,10 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ steps.vars.outputs.REPO_LOWER }}:arm64
+
+      - name: Create and push manifest list for main tag
+        run: |
+          docker manifest create ghcr.io/${{ steps.vars.outputs.REPO_LOWER }}:main \
+            --amend ghcr.ioIce/cream ghcr.io/${{ steps.vars.outputs.REPO_LOWER }}:amd64 \
+            --amend ghcr.io/${{ steps.vars.outputs.REPO_LOWER }}:arm64
+          docker manifest push ghcr.io/${{ steps.vars.outputs.REPO_LOWER }}:main
