@@ -1,4 +1,4 @@
-FROM arm64v8/ros:foxy
+FROM arm64v8/ros:humble
 
 RUN apt-get update && \
     apt-get install -y vim && \
@@ -38,6 +38,7 @@ RUN rosdep update
 # Source the ROS setup file
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
 
+ENV ROS_DOMAIN_ID=5
 
 ################################
 ## ADD ANY CUSTOM SETUP BELOW ##

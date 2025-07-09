@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(groups:*)",
+      "Bash(sudo usermod:*)",
+      "Bash(getent:*)",
+      "Bash(sudo chmod:*)"
+    ],
+    "deny": []
+  }
+}
